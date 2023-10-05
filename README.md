@@ -23,18 +23,23 @@ Follow these steps once the project is running locally:
 #1. Clone the project:
    ```bash
    git clone https://github.com/ibrahimoglakci/restapi.git
+```
+
 
 #Install the required dependencies:
  ```bash
   composer install
+```
 
 #Create the database:
  ```bash
   php artisan migrate
+```
 
 #Run the project:
  ```bash
   php artisan serve
+```
 
 
 ## Example Usage
@@ -43,24 +48,29 @@ Follow these steps once the project is running locally:
 
  ```bash
   curl https://localhost:8000/api/v1/products
+```
 
 #Viewing a Specific Product
 ```bash
 curl https://localhost:8000/api/v1/product/1
+```
 
 #Adding a new Product
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"name": "New Product", "price": 20.0}' https://localhost:8000/api/v1/product
+```
 
 #Updating a Product
 
 ```bash
 curl -X PUT -H "Content-Type: application/json" -d '{"name": "Updated Product", "price": 25.0}' https://localhost:8000/api/v1/product/1
+```
 
 #Deleting a Product
 ```bash
 curl -X DELETE https://localhost:8000/api/v1/product/1
+```
 
 
 
