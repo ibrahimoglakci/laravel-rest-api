@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
                 'image' => 'image_' . ($i + 1) . '.jpg',
                 'price' => rand(10, 100),
                 'stock' => rand(0, 100),
-                'status' => rand(0, 1) ? 'active' : 'inactive',
+                'status' => rand(0, 1) ? 0 : 1,
             ]);
         }
     }

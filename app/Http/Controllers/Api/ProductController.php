@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ProductsController;
 use App\Models\Products;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+
     public function index()
     {
-        $products = Products::all();
-        $response = response()->json($products,200);
-        return $response;
+        $productController = new ProductsController();
+        $products = $productController->getProducts();
+
+        return $products;
     }
 
     /**
@@ -23,59 +24,44 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = new Products();
 
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->image = $request->image;
-        $product->price = $request->price;
-        $product->stock = $request->stock;
-        $product->status = $request->status;
+        $productController = new ProductsController();
+        $addproduct = $productController->addProduct($request);
 
-        $product->save();
-
-        $response = response()->json(["message" => "Successfully created product", "created_product" => $product],201);
-        return $response;
+        return $addproduct;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(int $id)
     {
-        $product = Products::find($id);
 
-        $response = response()->json($product,200);
-        return $response;
+        $productController = new ProductsController();
+        $product = $productController->getProduct($id);
 
+        return $product;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
-        $product = Products::findOrFail($request->id);
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->image = $request->image;
-        $product->price = $request->price;
-        $product->stock = $request->stock;
-        $product->status = $request->status;
-        $product->save();
+        $productController = new ProductsController();
+        $updateproduct = $productController->updateProduct($request,$id);
 
-        $response = response()->json(["message" => "Successfully deleted product", "updated_product" => $product],201);
-        return $response;
+        return $updateproduct;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $product = Products::destroy($id);
 
-        $response = response()->json(["message" => "Successfully deleted product"],201);
+        $response = response()->json(["message" => "Successfully deleted product"], 201);
 
         return $response;
     }
